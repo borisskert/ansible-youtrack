@@ -1,0 +1,19 @@
+---
+- name: Prepare
+  hosts: all
+  become: true
+
+  roles:
+    - role: install-docker
+      docker_storage_driver: overlay2
+      docker_cleanup_enabled: false
+      docker_install_pip_package: true
+
+  post_tasks:
+    - name: clean up pulled docker image
+      docker_image:
+        name: "jetbrains/youtrack:{{ youtrack_version_for_tests }}"
+        source: local
+        state: absent
+        force_absent: true
+      failed_when: false

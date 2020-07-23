@@ -29,6 +29,10 @@ provisioner:
         molecule_docker_environment: true
       debian:
         ansible_python_interpreter: /usr/bin/python3
+    hosts:
+      all:
+        vars:
+          youtrack_version_for_tests: 2020.3.888
 
 verifier:
   name: ansible

@@ -8,3 +8,12 @@
         path: /etc/systemd/system/youtrack.service
       register: systemd_service_file
       failed_when: not systemd_service_file.stat.exists
+
+    - name: Should pull docker image
+      docker_image:
+        name: "jetbrains/youtrack:{{ youtrack_version_for_tests }}"
+        source: local
+        state: present
+      register: pull_docker_image
+      failed_when: pull_docker_image.failed
+        or pull_docker_image.changed
