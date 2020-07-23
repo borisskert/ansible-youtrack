@@ -1,0 +1,32 @@
+---
+- name: Create data volume
+  file:
+    path: "{{ youtrack_data_volume }}"
+    state: directory
+    owner: "{{ youtrack_user_id }}"
+    group: "{{ youtrack_user_id }}"
+    mode: 0750
+
+- name: Create config volume
+  file:
+    path: "{{ youtrack_config_volume }}"
+    state: directory
+    owner: "{{ youtrack_user_id }}"
+    group: "{{ youtrack_user_id }}"
+    mode: 0750
+
+- name: Create logs volume
+  file:
+    path: "{{ youtrack_logs_volume }}"
+    state: directory
+    owner: "{{ youtrack_user_id }}"
+    group: "{{ youtrack_user_id }}"
+    mode: 0750
+
+- name: Create backups volume
+  file:
+    path: "{{ youtrack_backups_volume }}"
+    state: directory
+    owner: "{{ youtrack_user_id }}"
+    group: "{{ youtrack_user_id }}"
+    mode: 0750

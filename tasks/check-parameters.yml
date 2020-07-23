@@ -1,0 +1,35 @@
+---
+- name: Check 'youtrack_image_version' parameter
+  assert:
+    that:
+      - "youtrack_image_version is defined"
+      - "youtrack_image_version | length > 0"
+    fail_msg: "parameter 'youtrack_image_version' is missing"
+
+- name: Check 'youtrack_data_volume' parameter
+  assert:
+    that:
+      - "youtrack_data_volume is defined"
+      - "youtrack_data_volume | length > 0"
+    fail_msg: "parameter 'youtrack_data_volume' is missing"
+
+- name: Check 'youtrack_config_volume' parameter
+  assert:
+    that:
+      - "youtrack_config_volume is defined"
+      - "youtrack_config_volume | length > 0"
+    fail_msg: "parameter 'youtrack_config_volume' is missing"
+
+- name: Check 'youtrack_logs_volume' parameter
+  assert:
+    that:
+      - "youtrack_logs_volume is defined"
+      - "youtrack_logs_volume | length > 0"
+    fail_msg: "parameter 'youtrack_logs_volume' is missing"
+
+- name: Check 'youtrack_backups_volume' parameter
+  assert:
+    that:
+      - "youtrack_backups_volume is defined"
+      - "youtrack_backups_volume | length > 0"
+    fail_msg: "parameter 'youtrack_backups_volume' is missing"

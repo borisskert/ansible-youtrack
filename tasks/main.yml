@@ -1,10 +1,6 @@
 ---
-- name: Check 'youtrack_image_version' parameter
-  assert:
-    that:
-      - "youtrack_image_version is defined"
-      - "youtrack_image_version | length > 0"
-    fail_msg: "parameter 'youtrack_image_version' is missing"
+- name: Check role parameters
+  include: check-parameters.yml
 
 - name: Create systemd unit file
   template:
@@ -22,3 +18,6 @@
     name: "{{ youtrack_image_name }}:{{ youtrack_image_version }}"
     source: pull
   notify: Restart youtrack service
+
+- name: Create volume directories
+  include: create-volumes.yml

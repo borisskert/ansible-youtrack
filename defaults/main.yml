@@ -5,3 +5,10 @@ youtrack_image_name: jetbrains/youtrack
 
 # Sadly, there is no 'latest' tag
 youtrack_image_version: ''
+
+youtrack_data_volume: ''
+youtrack_config_volume: ''
+youtrack_logs_volume: ''
+youtrack_backups_volume: ''
+
+youtrack_user_id: '13001'

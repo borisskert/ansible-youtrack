@@ -6,3 +6,7 @@
   roles:
     - role: ansible-youtrack
       youtrack_image_version: "{{ youtrack_version_for_tests }}"
+      youtrack_data_volume: /srv/youtrack/data
+      youtrack_config_volume: /srv/youtrack/config
+      youtrack_logs_volume: /srv/youtrack/logs
+      youtrack_backups_volume: /srv/youtrack/backups
