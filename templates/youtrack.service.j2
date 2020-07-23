@@ -1,0 +1,21 @@
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=youtrack service
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker rm -f {{ youtrack_docker_container_name }}
+ExecStartPre=/usr/bin/docker pull {{ youtrack_image_name }}:{{ youtrack_image_version }}
+
+ExecStart=/usr/bin/docker run --name {{ youtrack_docker_container_name }} \
+  {{ youtrack_image_name }}:{{ youtrack_image_version }}
+
+ExecStop=-/usr/bin/docker stop {{ youtrack_docker_container_name }}
+ExecStopPost=-/usr/bin/docker rm -f {{ youtrack_docker_container_name }}
+
+Restart=always
+RestartSec=60s
+TimeoutSec=3600

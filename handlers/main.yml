@@ -1,1 +1,21 @@
 ---
+- name: Enable youtrack service
+  systemd:
+    name: "{{ youtrack_service_name }}"
+    enabled: true
+    daemon_reload: true
+  when: not (
+    molecule_docker_environment is defined
+    and molecule_docker_environment | bool
+    )
+
+- name: Restart youtrack service
+  systemd:
+    name: "{{ youtrack_service_name }}"
+    state: restarted
+    daemon_reload: true
+  register: youtrack_restart
+  when: not (
+    molecule_docker_environment is defined
+    and molecule_docker_environment | bool
+    )

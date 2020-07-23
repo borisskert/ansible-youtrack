@@ -1,1 +1,7 @@
 ---
+youtrack_service_name: youtrack
+youtrack_docker_container_name: youtrack.service
+youtrack_image_name: jetbrains/youtrack
+
+# Sadly, there is no 'latest' tag
+youtrack_image_version: 2020.3.888

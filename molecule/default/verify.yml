@@ -1,7 +1,10 @@
 ---
 - name: Verify
   hosts: all
+
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+    - name: Should systemd unit file
+      stat:
+        path: /etc/systemd/system/youtrack.service
+      register: systemd_service_file
+      failed_when: not systemd_service_file.stat.exists
