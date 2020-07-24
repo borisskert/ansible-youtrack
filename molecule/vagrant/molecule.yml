@@ -1,0 +1,33 @@
+---
+dependency:
+  name: galaxy
+
+lint: |
+  set -e
+  yamllint . --strict
+  ansible-lint
+
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+
+platforms:
+  - name: ansible-docker-buster
+    box: debian/buster64
+    groups:
+      - debian
+
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      debian:
+        ansible_python_interpreter: /usr/bin/python3
+    hosts:
+      all:
+        vars:
+          youtrack_version_for_tests: 2020.3.888
+
+verifier:
+  name: ansible

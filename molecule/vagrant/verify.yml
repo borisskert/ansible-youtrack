@@ -1,0 +1,67 @@
+---
+- name: Verify
+  hosts: all
+
+  tasks:
+    - name: Should systemd unit file
+      stat:
+        path: /etc/systemd/system/youtrack.service
+      register: systemd_service_file
+      failed_when: not systemd_service_file.stat.exists
+
+    - name: Should pull docker image
+      docker_image:
+        name: "jetbrains/youtrack:{{ youtrack_version_for_tests }}"
+        source: local
+        state: present
+      register: pull_docker_image
+      failed_when: pull_docker_image.failed
+        or pull_docker_image.changed
+
+    - name: Should create data volume directory
+      stat:
+        path: /srv/youtrack/data
+      register: data_volume_directory
+      failed_when: not (
+        data_volume_directory.stat.exists | bool
+        and data_volume_directory.stat.isdir | bool
+        and data_volume_directory.stat.mode == '0750'
+        and data_volume_directory.stat.uid == 13001
+        and data_volume_directory.stat.gid == 13001
+        )
+
+    - name: Should create config volume directory
+      stat:
+        path: /srv/youtrack/config
+      register: config_volume_directory
+      failed_when: not (
+        config_volume_directory.stat.exists | bool
+        and config_volume_directory.stat.isdir | bool
+        and config_volume_directory.stat.mode == '0750'
+        and config_volume_directory.stat.uid == 13001
+        and config_volume_directory.stat.gid == 13001
+        )
+
+    - name: Should create logs volume directory
+      stat:
+        path: /srv/youtrack/logs
+      register: logs_volume_directory
+      failed_when: not (
+        logs_volume_directory.stat.exists | bool
+        and logs_volume_directory.stat.isdir | bool
+        and logs_volume_directory.stat.mode == '0750'
+        and logs_volume_directory.stat.uid == 13001
+        and logs_volume_directory.stat.gid == 13001
+        )
+
+    - name: Should create backups volume directory
+      stat:
+        path: /srv/youtrack/backups
+      register: backups_volume_directory
+      failed_when: not (
+        backups_volume_directory.stat.exists | bool
+        and backups_volume_directory.stat.isdir | bool
+        and backups_volume_directory.stat.mode == '0750'
+        and backups_volume_directory.stat.uid == 13001
+        and backups_volume_directory.stat.gid == 13001
+        )
