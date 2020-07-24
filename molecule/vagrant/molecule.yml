@@ -13,10 +13,10 @@ driver:
     name: virtualbox
 
 platforms:
-  - name: ansible-docker-buster
-    box: debian/buster64
-    groups:
-      - debian
+  - name: ansible-docker-bionic
+    box: ubuntu/bionic64
+    memory: 1024
+    cpus: 2
 
 provisioner:
   name: ansible
@@ -28,6 +28,7 @@ provisioner:
       all:
         vars:
           youtrack_version_for_tests: 2020.3.888
+          youtrack_port_for_tests: 8080
 
 verifier:
   name: ansible

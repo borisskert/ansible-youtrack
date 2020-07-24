@@ -15,6 +15,7 @@ ExecStart=/usr/bin/docker run --name {{ youtrack_docker_container_name }} \
   --volume {{ youtrack_config_volume }}:/opt/youtrack/conf \
   --volume {{ youtrack_logs_volume }}:/opt/youtrack/logs \
   --volume {{ youtrack_backups_volume }}:/opt/youtrack/backups \
+  --publish {{ youtrack_interface }}:{{ youtrack_port }}:8080/tcp \
   {{ youtrack_image_name }}:{{ youtrack_image_version }}
 
 ExecStop=-/usr/bin/docker stop {{ youtrack_docker_container_name }}

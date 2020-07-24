@@ -12,3 +12,6 @@ youtrack_logs_volume: ''
 youtrack_backups_volume: ''
 
 youtrack_user_id: '13001'
+
+youtrack_port: ''
+youtrack_interface: '0.0.0.0'

@@ -33,3 +33,10 @@
       - "youtrack_backups_volume is defined"
       - "youtrack_backups_volume | length > 0"
     fail_msg: "parameter 'youtrack_backups_volume' is missing"
+
+- name: Check 'youtrack_port' parameter
+  assert:
+    that:
+      - "youtrack_port is defined"
+      - "youtrack_port | int > 0"
+    fail_msg: "parameter 'youtrack_port' is missing"

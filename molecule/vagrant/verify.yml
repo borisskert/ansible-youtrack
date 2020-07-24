@@ -1,6 +1,7 @@
 ---
 - name: Verify
   hosts: all
+  become: true
 
   tasks:
     - name: Should systemd unit file
@@ -65,3 +66,12 @@
         and backups_volume_directory.stat.uid == 13001
         and backups_volume_directory.stat.gid == 13001
         )
+
+    - name: Should open tcp port
+      command: 'nc -z -w1 localhost {{ youtrack_port_for_tests }}'
+      changed_when: false
+      register: netcat_tcp_port
+      retries: 300
+      delay: 1
+      until: netcat_tcp_port is defined
+        and netcat_tcp_port.rc == 0
